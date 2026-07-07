@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2nd&2 | Elite Sports Development</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #112240;
+    --navy-light: #1a3560;
+    --blue: #1d6fd4;
+    --blue-bright: #2c87f0;
+    --blue-light: #e8f2fd;
+    --white: #ffffff;
+    --off-white: #f4f7fc;
+    --gray: #8a9ab8;
+    --gray-light: #d0daea;
+    --gold: #c8a84b;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(10, 22, 40, 0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(29, 111, 212, 0.2);
+    padding: 0 2.5rem;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--blue-bright); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+  }
+
+  .nav-links > li { position: relative; }
+
+  .nav-links > li > a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nav-links > li > a:hover { color: var(--white); background: rgba(255,255,255,0.07); }
+
+  .nav-links .has-dropdown > a::after {
+    content: ' ▾';
+    font-size: 0.7rem;
+    opacity: 0.6;
+  }
+
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 220px;
+    background: var(--navy-mid);
+    border: 1px solid rgba(29,111,212,0.25);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+
+  .dropdown a {
+    display: block;
+    padding: 0.85rem 1.25rem;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 400;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .dropdown a:last-child { border-bottom: none; }
+  .dropdown a:hover { background: rgba(29,111,212,0.15); color: var(--white); }
+
+  .dropdown .drop-icon {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: rgba(29,111,212,0.15);
+    border-radius: 6px;
+    text-align: center;
+    line-height: 28px;
+    font-size: 0.9rem;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .has-dropdown:hover .dropdown { display: block; }
+
+  .nav-cta {
+    background: var(--blue) !important;
+    color: var(--white) !important;
+    border-radius: 6px !important;
+    padding: 0.5rem 1.2rem !important;
+    font-weight: 600 !important;
+  }
+
+  .nav-cta:hover { background: var(--blue-bright) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-field {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 58px,
+        rgba(255,255,255,0.5) 58px,
+        rgba(255,255,255,0.5) 60px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 58px,
+        rgba(255,255,255,0.3) 58px,
+        rgba(255,255,255,0.3) 60px
+      );
+  }
+
+  .hero-accent {
+    position: absolute;
+    right: -120px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(29,111,212,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-stripe {
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--blue) 0%, var(--blue-bright) 50%, transparent 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    padding-top: 70px;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    border: 1px solid rgba(44,135,240,0.3);
+    background: rgba(44,135,240,0.08);
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 10vw, 8.5rem);
+    color: var(--white);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title .highlight {
+    color: var(--blue-bright);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.6);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--blue);
+    color: var(--white);
+    padding: 0.9rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); }
+
+  .btn-outline {
+    display: inline-block;
+    color: var(--white);
+    padding: 0.9rem 2rem;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .btn-outline:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.5); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+
+  .stat-num span { color: var(--blue-bright); }
+
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-top: 2px;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 6rem 2.5rem; }
+
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: var(--navy);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: #5a6a88;
+    max-width: 560px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── MISSION ── */
+  .mission { background: var(--off-white); }
+
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3.5rem;
+  }
+
+  .mission-text p {
+    font-size: 1.05rem;
+    color: #3d4f6e;
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+  }
+
+  .mission-text p:last-child { margin-bottom: 0; }
+
+  .mission-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .pillar {
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--blue);
+  }
+
+  .pillar-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .pillar h4 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+  }
+
+  .pillar p {
+    font-size: 0.85rem;
+    color: #5a6a88;
+    line-height: 1.5;
+  }
+
+  /* ── PROGRAMS ── */
+  .programs { background: var(--white); }
+
+  .programs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+
+  .programs-tabs {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--off-white);
+    border: 1px solid var(--gray-light);
+    border-radius: 8px;
+    padding: 4px;
+  }
+
+  .tab-btn {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    background: none;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .programs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .program-card {
+    border: 1px solid var(--gray-light);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: var(--white);
+  }
+
+  .program-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(10,22,40,0.1);
+  }
+
+  .program-card.featured {
+    border: 2px solid var(--blue);
+    position: relative;
+  }
+
+  .program-badge {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: var(--blue);
+    color: var(--white);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+  }
+
+  .card-header {
+    height: 140px;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(29,111,212,0.3) 0%, transparent 60%);
+  }
+
+  .card-body { padding: 1.5rem; }
+
+  .card-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: #5a6a88;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-light);
+  }
+
+  .meta-item {
+    font-size: 0.75rem;
+    color: var(--gray);
+  }
+
+  .meta-item strong { color: var(--navy); display: block; font-size: 0.8rem; }
+
+  .card-cta {
+    display: block;
+    text-align: center;
+    background: var(--blue-light);
+    color: var(--blue);
+    padding: 0.7rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: background 0.2s;
+  }
+
+  .card-cta:hover { background: var(--blue); color: var(--white); }
+
+  /* ── DROPDOWN SECTIONS ── */
+  .dropdown-sections { background: var(--navy); padding: 6rem 2.5rem; }
+
+  .section-title-white {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: var(--white);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .section-eyebrow-white {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 0.75rem;
+  }
+
+  .accordions { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; }
+
+  .accordion {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .accordion-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .accordion-head:hover { background: rgba(29,111,212,0.08); }
+
+  .acc-left { display: flex; align-items: center; gap: 1.25rem; }
+
+  .acc-icon {
+    width: 44px; height: 44px;
+    background: rgba(29,111,212,0.15);
+    border: 1px solid rgba(29,111,212,0.25);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .acc-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+
+  .acc-sub {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .acc-toggle {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 1.1rem;
+    transition: transform 0.3s, background 0.2s;
+    flex-shrink: 0;
+  }
+
+  .accordion.open .acc-toggle {
+    transform: rotate(45deg);
+    background: rgba(29,111,212,0.3);
+    color: var(--white);
+  }
+
+  .accordion-body {
+    display: none;
+    padding: 0 2rem 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .accordion.open .accordion-body { display: block; }
+
+  .acc-content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .acc-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 1.25rem;
+    transition: background 0.2s;
+  }
+
+  .acc-item:hover { background: rgba(29,111,212,0.1); }
+
+  .acc-item-title {
+    font-weight: 600;
+    color: var(--white);
+    font-size: 0.92rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .acc-item-desc {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+  }
+
+  .acc-cta {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.65rem 1.4rem;
+    background: var(--blue);
+    color: var(--white);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .acc-cta:hover { background: var(--blue-bright); }
+
+  /* ── MERCH STRIP ── */
+  .merch-strip {
+    background: var(--blue);
+    padding: 4rem 2.5rem;
+    text-align: center;
+  }
+
+  .merch-strip h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--white);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .merch-strip p {
+    color: rgba(255,255,255,0.7);
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .merch-tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .merch-tag {
+    background: rgba(255,255,255,0.12);
+    color: var(--white);
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .btn-white {
+    display: inline-block;
+    background: var(--white);
+    color: var(--blue);
+    padding: 0.9rem 2.2rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn-white:hover { opacity: 0.9; }
+
+  /* ── INTERVIEWS ── */
+  .interviews { background: var(--off-white); }
+
+  .interviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .interview-card {
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .interview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(10,22,40,0.08);
+  }
+
+  .interview-thumb {
+    height: 180px;
+    background: var(--navy-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    position: relative;
+  }
+
+  .play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10,22,40,0.4);
+  }
+
+  .play-circle {
+    width: 52px; height: 52px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white);
+    font-size: 1.3rem;
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .interview-card:hover .play-circle {
+    transform: scale(1.1);
+    background: var(--blue-bright);
+  }
+
+  .interview-body { padding: 1.25rem; }
+
+  .int-tag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.4rem;
+  }
+
+  .int-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .int-meta {
+    font-size: 0.78rem;
+    color: var(--gray);
+    display: flex;
+    gap: 1rem;
+  }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: var(--navy);
+    padding: 6rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-band::before {
+    content: '2&2';
+    position: absolute;
+    font-family: var(--font-display);
+    font-size: 28rem;
+    color: rgba(255,255,255,0.02);
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+
+  .cta-band h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--white);
+    letter-spacing: 0.03em;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .cta-band p {
+    color: rgba(255,255,255,0.5);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    font-weight: 300;
+    position: relative;
+  }
+
+  .cta-band-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060e1a;
+    padding: 4rem 2.5rem 2rem;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand .logo {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-brand .logo span { color: var(--blue-bright); }
+
+  .footer-brand p {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    max-width: 260px;
+  }
+
+  .footer-col h5 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 1rem;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    margin-bottom: 0.6rem;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--white); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+  }
+
+  .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  .footer-bottom a:hover { color: var(--white); }
+
+  /* ── MOBILE MENU ── */
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .menu-toggle { display: block; }
+    .nav-links { display: none; }
+    .mission-grid { grid-template-columns: 1fr; }
+    .programs-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .programs-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .hero-stats { gap: 2rem; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">2nd<span>&</span>2</a>
+  <ul class="nav-links">
+    <li><a href="#mission">About</a></li>
+    <li class="has-dropdown">
+      <a href="#camps">Camps</a>
+      <div class="dropdown">
+        <a href="#camps"><span class="drop-icon">🏈</span> Elite Skills Camp</a>
+        <a href="#camps"><span class="drop-icon">⚡</span> Speed & Agility</a>
+
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#tournaments">Tournaments</a>
+      <div class="dropdown">
+        <a href="#tournaments"><span class="drop-icon">🥇</span> 7-on-7 Series</a>
+        <a href="#tournaments"><span class="drop-icon">📍</span> Regional Showcases</a>
+        <a href="#tournaments"><span class="drop-icon">🎓</span> College Exposure Events</a>
+        <a href="#tournaments"><span class="drop-icon">📋</span> Tournament Schedule</a>
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#merch">Gear</a>
+      <div class="dropdown">
+        <a href="#merch"><span class="drop-icon">👕</span> Apparel</a>
+        <a href="#merch"><span class="drop-icon">🎒</span> Training Gear</a>
+        <a href="#merch"><span class="drop-icon">🧢</span> Headwear</a>
+        <a href="#merch"><span class="drop-icon">🎁</span> Bundles</a>
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#interviews">Media</a>
+      <div class="dropdown">
+        <a href="#interviews"><span class="drop-icon">🎙️</span> Player Interviews</a>
+        <a href="#interviews"><span class="drop-icon">🎬</span> Highlight Reels</a>
+        <a href="#interviews"><span class="drop-icon">📡</span> Coach Breakdowns</a>
+        <a href="#interviews"><span class="drop-icon">📰</span> Press & Features</a>
+      </div>
+    </li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+  <button class="menu-toggle" aria-label="Open menu">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-field"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-stripe"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Elite Sports Development</div>
+    <h1 class="hero-title">
+      When It<br>
+      Matters<br>
+      <span class="highlight">Most.</span>
+    </h1>
+    <p class="hero-sub">2nd&2 develops the next generation of elite athletes through world-class training, competitive events, and authentic exposure opportunities.</p>
+    <div class="hero-btns">
+      <a href="#mission" class="btn-primary">Our Mission</a>
+      <a href="#camps" class="btn-outline">Explore Programs</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">500<span>+</span></div>
+        <div class="stat-label">Athletes Developed</div>
+      </div>
+      <div>
+        <div class="stat-num">12<span>+</span></div>
+        <div class="stat-label">Annual Events</div>
+      </div>
+      <div>
+        <div class="stat-num">40<span>+</span></div>
+        <div class="stat-label">College Placements</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission" id="mission">
+  <div class="container">
+    <div class="section-eyebrow">Who We Are</div>
+    <h2 class="section-title">Built on the Belief That Every Athlete Deserves a Shot</h2>
+    <div class="mission-grid">
+      <div class="mission-text">
+        <p>2nd&2 was founded on the principle that the most critical moments in sports — and in life — require preparation, mentorship, and access. Named after the most pressure-packed moment on the field, we build athletes from the ground up.</p>
+        <p>We provide elite training environments, competitive showcases, and real media exposure that bridge the gap between raw talent and next-level opportunity. Our team of coaches and industry professionals work with athletes across skill levels, ages, and backgrounds.</p>
+        <p>From your first rep at camp to your college signing day, 2nd&2 is in your corner every step of the way. A "2nd and 2" is a down where you're set up for success — and that's exactly what we build for every athlete who comes through our doors.</p>
+        <a href="#camps" class="btn-primary" style="margin-top: 1.5rem; display: inline-block;">Explore Programs</a>
+      </div>
+      <div class="mission-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">🏋️</div>
+          <h4>Development</h4>
+          <p>Skill-specific training led by elite coaches with proven track records.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🎯</div>
+          <h4>Exposure</h4>
+          <p>Real college scouts and recruiters at every showcase event.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤝</div>
+          <h4>Mentorship</h4>
+          <p>Guidance from professionals who've navigated the path you're on.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📡</div>
+          <h4>Platform</h4>
+          <p>Media coverage, highlight production, and interview opportunities.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs" id="camps">
+  <div class="container">
+    <div class="programs-header">
+      <div>
+        <div class="section-eyebrow">Training</div>
+        <h2 class="section-title">Camps & Programs</h2>
+        <p class="section-sub">Structured, sport-specific training environments designed to elevate every athlete.</p>
+      </div>
+      <div class="programs-tabs">
+        <button class="tab-btn active">All</button>
+        <button class="tab-btn">Youth</button>
+        <button class="tab-btn">High School</button>
+        <button class="tab-btn">Elite</button>
+      </div>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card featured">
+        <div class="program-badge">Most Popular</div>
+        <div class="card-header">🏈</div>
+        <div class="card-body">
+          <div class="card-tag">Flagship Program</div>
+          <div class="card-title">Elite Skills Camp</div>
+          <div class="card-desc">Full-day immersive training focused on position-specific fundamentals, game film review, and measurable performance goals.</div>
+          <div class="card-meta">
+            <div class="meta-item"><strong>Ages 12–18</strong>Eligibility</div>
+            <div class="meta-item"><strong>1 Day</strong>Duration</div>
+            <div class="meta-item"><strong>Limited</strong>Spots</div>
+          </div>
+          <a href="#contact" class="card-cta">Register Now</a>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="card-header">⚡</div>
+        <div class="card-body">
+          <div class="card-tag">Performance</div>
+          <div class="card-title">Speed & Agility Clinic</div>
+          <div class="card-desc">Science-backed speed development program with professional timing systems, resistance training, and personalized feedback.</div>
+          <div class="card-meta">
+            <div class="meta-item"><strong>Ages 12–18</strong>Eligibility</div>
+            <div class="meta-item"><strong>1 Day</strong>Duration</div>
+          </div>
+          <a href="#contact" class="card-cta">Learn More</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACCORDION SECTIONS: Tournaments, Merch, Interviews -->
+<section class="dropdown-sections" id="tournaments">
+  <div class="container">
+    <div class="section-eyebrow-white">Everything 2nd&2</div>
+    <h2 class="section-title-white">Compete. Represent. Speak.</h2>
+    <p style="color: rgba(255,255,255,0.45); font-size: 1rem; font-weight: 300; max-width: 520px; line-height: 1.7; margin-top: 0.5rem;">Everything you need to grow as an athlete, build your brand, and make your mark.</p>
+
+    <div class="accordions">
+
+      <!-- Tournaments -->
+      <div class="accordion open">
+        <div class="accordion-head" onclick="toggleAcc(this)">
+          <div class="acc-left">
+            <div class="acc-icon">🏆</div>
+            <div>
+              <div class="acc-title">Tournaments</div>
+              <div class="acc-sub">Competitive showcases & events</div>
+            </div>
+          </div>
+          <div class="acc-toggle">+</div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-content-grid">
+            <div class="acc-item">
+              <div class="acc-item-title">7-on-7 Summer Series</div>
+              <div class="acc-item-desc">Multi-team competitive events with live college scout presence and performance tracking.</div>
+            </div>
+            <div class="acc-item">
+              <div class="acc-item-title">Regional Showcases</div>
+              <div class="acc-item-desc">Regionally-hosted events that bring athletes and recruiters together in a structured combine format.</div>
+            </div>
+            <div class="acc-item">
+              <div class="acc-item-title">College Exposure Events</div>
+              <div class="acc-item-desc">Invitation-only events with verified college coaches from Division I, II, and III programs.</div>
+            </div>
+            <div class="acc-item">
+              <div class="acc-item-title">Youth Championships</div>
+              <div class="acc-item-desc">Age-bracket tournaments for younger athletes to compete in a safe, structured setting.</div>
+            </div>
+          </div>
+          <a href="#contact" class="acc-cta">View Full Schedule →</a>
+        </div>
+      </div>
+
+      <!-- Merch -->
+      <div class="accordion" id="merch">
+        <div class="accordion-head" onclick="toggleAcc(this)">
+          <div class="acc-left">
+            <div class="acc-icon">👕</div>
+            <div>
+              <div class="acc-title">Merchandise</div>
+              <div class="acc-sub">Official 2nd&2 apparel & gear</div>
+            </div>
+          </div>
+          <div class="acc-toggle">+</div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-content-grid">
+            <div class="acc-item">
+              <div class="acc-item-title">Performance Apparel</div>
+              <div class="acc-item-desc">Moisture-wicking training tops, shorts, and compression gear with the 2nd&2 logo.</div>
+            </div>
+            <div class="acc-item">
+              <div class="acc-item-title">Lifestyle Collection</div>
+              <div class="acc-item-desc">Hoodies, tees, and sweatsuits built for off-field culture and brand identity.</div>
+            </div>
+            <div class="acc-item">
+              <div class="acc-item-title">Headwear</div>
+              <div class="acc-item-desc">Snapbacks, fitted caps, and beanies with embroidered branding in navy and blue.</div>
+            </div>
+            <div class="acc-item">
+              <div class="acc-item-title">Camp Bundles</div>
+              <div class="acc-item-desc">Exclusive gear packages for registered campers including bag, shirt, and water bottle.</div>
+            </div>
+          </div>
+          <a href="#contact" class="acc-cta">Shop the Store →</a>
+        </div>
+      </div>
+
+      <!-- Interviews -->
+      <div class="accordion" id="interviews">
+        <div class="accordion-head" onclick="toggleAcc(this)">
+          <div class="acc-left">
+            <div class="acc-icon">🎙️</div>
+            <div>
+              <div class="acc-title">Interviews</div>
+              <div class="acc-sub">Stories from athletes, coaches & pros</div>
+            </div>
+          </div>
+          <div class="acc-toggle">+</div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-content-grid">
+            <div class="acc-item">
+              <div class="acc-item-title">Athlete Spotlights</div>
+              <div class="acc-item-desc">In-depth profiles and sit-down interviews with rising stars from our program.</div>
+            </div>
+            <div class="acc-item">
+              <div class="acc-item-title">Coach Breakdowns</div>
+              <div class="acc-item-desc">X's and O's sessions with 2nd&2 staff and guest coaches from the college and pro ranks.</div>
+            </div>
+            <div class="acc-item">
+              <div class="acc-item-title">Pro Player Conversations</div>
+              <div class="acc-item-desc">Candid conversations with active and former professional athletes on mindset, craft, and career.</div>
+            </div>
+            <div class="acc-item">
+              <div class="acc-item-title">Recruit Diaries</div>
+              <div class="acc-item-desc">Follow athletes through the recruiting process — visits, decisions, and signing day moments.</div>
+            </div>
+          </div>
+          <a href="#contact" class="acc-cta">Watch All Content →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band" id="contact">
+  <h2>Ready to Make Your Move?</h2>
+  <p>Whether you're registering for a camp, entering a tournament, or just getting started — we're here. Let's build something.</p>
+  <div class="cta-band-btns">
+    <a href="mailto:info@2nd2sports.com" class="btn-primary">Contact Us</a>
+    <a href="#camps" class="btn-outline">View Programs</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">2nd<span>&</span>2</div>
+      <p>Building elite athletes and creating real opportunities through training, competition, and authentic media exposure.</p>
+      <a href="mailto:info@2nd2sports.com" style="color: var(--blue-bright); font-size: 0.85rem; margin-top: 0.75rem; display: inline-block;">info@2nd2sports.com</a>
+    </div>
+    <div class="footer-col">
+      <h5>Programs</h5>
+      <a href="#camps">Camps</a>
+      <a href="#tournaments">Tournaments</a>
+      <a href="#merch">Merchandise</a>
+      <a href="#interviews">Interviews</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#mission">About 2nd&2</a>
+      <a href="#mission">Our Mission</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact">Partnerships</a>
+    </div>
+    <div class="footer-col">
+      <h5>Follow Us</h5>
+      <a href="#">Instagram</a>
+      <a href="#">X / Twitter</a>
+      <a href="#">YouTube</a>
+      <a href="#">TikTok</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 2nd&2 Sports. All rights reserved.</span>
+    <div style="display: flex; gap: 1.5rem;">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleAcc(head) {
+    const acc = head.closest('.accordion');
+    acc.classList.toggle('open');
+  }
+
+  // Tab switching (visual only)
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
