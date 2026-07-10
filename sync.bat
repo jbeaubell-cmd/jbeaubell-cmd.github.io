@@ -10,6 +10,9 @@ if "%COMMIT_MSG%"=="" (
     exit /b 1
 )
 
+git pull
+if errorlevel 1 exit /b 1
+
 git add .
 if errorlevel 1 exit /b 1
 
